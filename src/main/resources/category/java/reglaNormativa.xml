@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+
+<ruleset name="Normativa de Java - BCI"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+	<description>
+		Ruleset no debe importar wcorp.util.DateUtil.
+	</description>
+
+	<!-- Rules, that have been moved into a category -->
+	
+	<rule name="ordenCorrectoModificadores"
+      message="[ordenCorrectoModificadores] Avoid OrdenCorrectoModificadoresRule blocks"
+      class="cl.bci.pmd.rule.politica.OrdenCorrectoModificadoresRule">
+		<description>
+			No Usar Mas Asignacion En Una Sentencia {Regla #27}
+		</description>
+	</rule>
+	
+	<rule name="noUsarMasAsignacionEnUnaSentencia"
+      message="[noUsarMasAsignacionEnUnaSentencia] Avoid NoUsarMasAsignacionEnUnaSentenciaRule blocks"
+      class="cl.bci.pmd.rule.politica.NoUsarMasAsignacionEnUnaSentenciaRule">
+		<description>
+			No Usar Mas Asignacion En Una Sentencia {Regla #27}
+		</description>
+	</rule>
+	
+	<rule name="noUsarNumerosMagicos"
+      message="[noUsarNumerosMagicos] Avoid NoUsarNumerosMagicosRule blocks"
+      class="cl.bci.pmd.rule.politica.NoUsarNumerosMagicosRule">
+		<description>
+			No usar numeros magicos {Regla #18}
+		</description>
+	</rule>
+
+	<rule name="noUsarClassesInner"
+      message="[noUsarClassesInner] Avoid NoUsarClassesInnerRule blocks"
+      class="cl.bci.pmd.rule.politica.NoUsarClassesInnerRule">
+		<description>
+			No usar clases inner  {Regla #14}
+		</description>
+	</rule>
+	
+	<rule name="noDeclararAtributosSeguidos"
+      message="[noDeclararAtributosSeguidos] Avoid NoDeclararAtributosSeguidosRule blocks"
+      class="cl.bci.pmd.rule.politica.NoDeclararAtributosSeguidosRule">
+		<description>
+			No declarar atributos seguidos {Regla #8}
+		</description>
+	</rule>
+
+	<rule name="noUsarCatchVacio"
+      message="[noUsarCatchVacio] Avoid NoUsarCatchVacioRule blocks"
+      class="cl.bci.pmd.rule.politica.NoUsarCatchVacioRule">
+		<description>
+			No permite block vacios dentro catch  {Regla #6}
+		</description>
+	</rule>
+	
+	<rule name="noUsarFloat"
+      message="[noUsarFloat] Avoid NoUsarFloatRule blocks"
+      class="cl.bci.pmd.rule.politica.NoUsarFloatRule">
+		<description>
+			No Usar Float Rule {Regla #2}
+		</description>
+	</rule>
+	
+	<rule name="bloquesProhibidos"
+      message="[bloquesProhibidos] Avoid BloquesProhibidosRule blocks"
+      class="cl.bci.pmd.rule.politica.BloquesProhibidosRule">
+		<description>
+			Bloques Prohibidos {Regla #1}
+		</description>
+	</rule>
+
+	<rule name="clasesMetodosProhibidos"
+      message="[clasesMetodosProhibidos] Avoid ClasesMetodosProhibidosRule blocks"
+      class="cl.bci.pmd.rule.politica.ClasesMetodosProhibidosRule">
+		<description>
+			Clases Metodos Prohibidos {Regla #1}
+		</description>
+	</rule>
+
+	<rule name="noDuplicateImports"
+      message="[noDuplicateImports] Avoid NoDuplicateImports blocks"
+      class="cl.bci.pmd.rule.politica.DuplicateImportsRule">
+		<description>
+			Imports NO Duplicados {Regla #1}
+		</description>
+	</rule>
+
+</ruleset>

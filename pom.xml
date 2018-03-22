@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>BCIpmd</groupId>
+  <artifactId>BCIpmd</artifactId>
+  <version>1.0</version>
+  <packaging>jar</packaging>
+
+  <name>BCIpmd</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+  
+	<!-- https://mvnrepository.com/artifact/net.sourceforge.pmd/pmd-java -->
+	<dependency>
+	    <groupId>net.sourceforge.pmd</groupId>
+	    <artifactId>pmd-java</artifactId>
+	    <version>6.1.0</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/net.sourceforge.pmd/pmd-plsql -->
+	<dependency>
+	    <groupId>net.sourceforge.pmd</groupId>
+	    <artifactId>pmd-plsql</artifactId>
+	    <version>6.1.0</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/net.sourceforge.pmd/pmd-jsp -->
+	<dependency>
+	    <groupId>net.sourceforge.pmd</groupId>
+	    <artifactId>pmd-jsp</artifactId>
+	    <version>6.1.0</version>
+	</dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.3.1</version>
+        <configuration>
+          <outputDirectory>D:\\devtools\\pmd-bin-6.1.0\\lib</outputDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

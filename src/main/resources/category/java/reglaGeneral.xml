@@ -1,0 +1,963 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Regla Generarl BCI">
+	<description>PMD Rule Set</description>
+	<!-- Classes Definidas por PMD-->
+	
+	<rule 
+		name="CompareObjectsWithEqualsRule"
+		message="[CompareObjectsWithEqualsRule] Use equals() to compare object references; avoid comparing them with ==."
+		class="cl.bci.pmd.rule.basica.CompareObjectsWithEqualsRule">
+		<description>
+		Use equals() to compare object references; avoid comparing them with ==.
+		</description>
+		<example>
+		<![CDATA[
+			class Foo {
+			  boolean bar(String a, String b) {
+			    return a == b;
+			  }
+			}
+		]]>
+		</example>		
+	</rule>
+	<rule 
+		name="AvoidFieldNameMatchingMethodNameRule"
+		message="[AvoidFieldNameMatchingMethodNameRule] It can be confusing to have a field name with the same name as a method. While this is permitted, having information (field) and actions (method) is not clear naming. Developers versed in Smalltalk often prefer this approach as the methods denote accessor methods."
+		class="cl.bci.pmd.rule.basica.AvoidFieldNameMatchingMethodNameRule">
+		<description>
+		It can be confusing to have a field name with the same name as a method. While this is permitted, having information (field) and actions (method) is not clear naming. Developers versed in Smalltalk often prefer this approach as the methods denote accessor methods.
+		</description>
+		<example>
+		<![CDATA[
+			public class Foo {
+			    Object bar;
+			    // bar is data or an action or both?
+			    void bar() {
+			    }
+			}
+		]]>
+		</example>		
+	</rule>
+
+	<rule 
+		name="AssignmentInOperandRule"
+		message="[AssignmentInOperandRule] Avoid assignments in operands; this can make code more complicated and harder to read."
+		class="cl.bci.pmd.rule.basica.AssignmentInOperandRule">
+		<description>
+		Avoid assignments in operands; this can make code more complicated and harder to read.
+		</description>
+		<example>
+		<![CDATA[
+			public void bar() {
+			    int x = 2;
+			    if ((x = getX()) == 3) {
+			      System.out.println("3!");
+			    }
+			}
+		]]>
+		</example>		
+	</rule>
+
+	<rule 
+		name="SingularFieldRule"
+		message="[SingularFieldRule] Fields whose scopes are limited to just single methods do not rely on the containing object to provide them to other methods. They may be better implemented as local variables within those methods."
+		class="cl.bci.pmd.rule.basica.SingularFieldRule">
+		<description>
+		Fields whose scopes are limited to just single methods do not rely on the containing object to provide them to other methods. They may be better implemented as local variables within those methods.
+		</description>
+		<example>
+		<![CDATA[
+			public class Foo {
+			    private int x;  // no reason to exist at the Foo instance level
+			    public void foo(int y) {
+			     x = y + 5;
+			     return x;
+			    }
+			}
+		]]>
+		</example>		
+	</rule>
+
+	<rule 
+		name="UnnecessaryFullyQualifiedNameRule"
+		message="[UnnecessaryFullyQualifiedNameRule] Import statements allow the use of non-fully qualified names. The use of a fully qualified name which is covered by an import statement is redundant. Consider using the non-fully qualified name."
+		class="cl.bci.pmd.rule.basica.UnnecessaryFullyQualifiedNameRule">
+		<description>
+			Import statements allow the use of non-fully qualified names. The use of a fully qualified name which is covered by an import statement is redundant. Consider using the non-fully qualified name.
+		</description>
+		<example>
+		<![CDATA[
+			import java.util.List;
+			
+			public class Foo {
+			    private java.util.List list1;   // Unnecessary FQN
+			    private List list2;             // More appropriate given import of 'java.util.List'
+			}
+		]]>
+		</example>		
+	</rule>
+
+	<rule 
+		name="UseCollectionIsEmptyRule"
+		message="[UseCollectionIsEmptyRule] The isEmpty() method on java.util.Collection is provided to determine if a collection has any elements. Comparing the value of size() to 0 does not convey intent as well as the isEmpty() method."
+		class="cl.bci.pmd.rule.basica.UseCollectionIsEmptyRule">
+		<description>
+			The isEmpty() method on java.util.Collection is provided to determine if a collection has any elements. Comparing the value of size() to 0 does not convey intent as well as the isEmpty() method.
+		</description>
+		<example>
+		<![CDATA[
+			public class Foo {
+			    void good() {
+			        List foo = getList();
+			        if (foo.isEmpty()) {
+			            // blah
+			        }
+			    }
+			
+			    void bad() {
+			        List foo = getList();
+			        if (foo.size() == 0) {
+			            // blah
+			        }
+			    }
+			}
+		]]>
+		</example>		
+	</rule>
+	 
+	<rule 
+		name="UnusedPrivateFieldRule"
+		message="[UnusedPrivateFieldRule] Detects when a private field is declared and/or assigned a value, but not used."
+		class="cl.bci.pmd.rule.basica.UnusedPrivateFieldRule">
+		<description>
+			Detects when a private field is declared and/or assigned a value, but not used.
+		</description>
+		<example>
+		<![CDATA[
+			public class Something {
+				private static int FOO = 2; // Unused
+				private int i = 5; // Unused
+				private int j = 6;
+				public int addOne() {
+					return j++;
+				}
+			}
+		]]>
+		</example>		
+	</rule>
+
+	<rule 
+		name="UnusedLocalVariableRule"
+		message="[UnusedLocalVariableRule] Detects when a local variable is declared and/or assigned, but not used."
+		class="cl.bci.pmd.rule.basica.UnusedLocalVariableRule">
+		<description>
+			Detects when a local variable is declared and/or assigned, but not used.
+		</description>
+		<example>
+		<![CDATA[
+		import java.io.File;  // not referenced or required
+		import java.util.*;   // not referenced or required
+			public class Foo {
+				public void doSomething() {
+					int i = 5; // Unused
+				}
+			}
+		]]>
+		</example>		
+	</rule>
+
+
+		<rule 
+		name="UnusedImportsRule"
+		message="[UnusedImportsRule] Avoid unused import statements to prevent unwanted dependencies. This rule will also find unused on demand imports, i.e. import com.foo.*."
+		class="cl.bci.pmd.rule.basica.UnusedImportsRule">
+		<description>
+			Avoid unused import statements to prevent unwanted dependencies. This rule will also find unused on demand imports, i.e. import com.foo.*.
+		</description>
+		<example>
+		<![CDATA[
+		import java.io.File;  // not referenced or required
+		import java.util.*;   // not referenced or required
+			public class Foo {
+		
+			}
+		]]>
+		</example>		
+	</rule>
+
+
+	<rule 
+		name="UnusedFormalParameterRule"
+		message="[UnusedFormalParameterRule] Avoid passing parameters to methods or constructors without actually referencing them in the method body."
+		class="cl.bci.pmd.rule.basica.UnusedFormalParameterRule">
+		<description>
+			UnusedFormalParameterRule
+		</description>
+		<example>
+		<![CDATA[
+			public class Foo {
+				private void bar(String howdy) {
+					// howdy is not used
+				}
+			}
+		]]>
+		</example>		
+	</rule>
+
+	
+	<rule 
+		name="ForLoopCanBeForeachRule"
+		message="[ForLoopCanBeForeachRule] Reports loops that can be safely replaced with the foreach syntax. The rule considers loops over lists, arrays and iterators. A loop is safe to replace if it only uses the index variable to access an element of the list or array, only has one update statement, and loops through every element of the list or array left to right."
+		class="cl.bci.pmd.rule.basica.ForLoopCanBeForeachRule">
+		<description>
+			Reports loops that can be safely replaced with the foreach syntax. The rule considers loops over lists, arrays and iterators. A loop is safe to replace if it only uses the index variable to access an element of the list or array, only has one update statement, and loops through every element of the list or array left to right.
+		</description>
+		<example>
+		<![CDATA[
+			public class MyClass {
+			  void loop(List<String> l) {
+				for (int i = 0; i < l.size(); i++) { // pre Java 1.5
+				  System.out.println(l.get(i));
+				}
+
+				for (String s : l) {        // post Java 1.5
+				  System.out.println(s);
+				}
+			  }
+			}
+		]]>
+		</example>		
+	</rule>
+	
+	<rule 
+		name="AvoidReassigningParametersRule"
+		message="[AvoidReassigningParametersRule] Reassigning values to incoming parameters is not recommended. Use temporary local variables instead."
+		class="cl.bci.pmd.rule.basica.AvoidReassigningParametersRule">
+		<description>
+			Reassigning values to incoming parameters is not recommended. Use temporary local variables instead.
+		</description>
+		<example>
+		<![CDATA[
+			public class Foo {
+			  private void foo(String bar) {
+				bar = "something else";
+			  }
+			}
+		]]>
+		</example>		
+	</rule>
+	<rule name="CommentRequiredRule"
+      message="[CommentRequiredRule] Avoid CommentRequiredRule blocks"
+      class="cl.bci.pmd.rule.basica.CommentRequiredRule">
+		<description>
+			Commentario Requerido {Regla #27}
+		</description>
+	</rule>
+	
+
+	<!-- XPathRule -->
+	
+	
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[AvoidLiteralsInIfCondition] Avoid using hard-coded literals in conditional statements. By declaring them as static variables or private members with descriptive names maintainability is enhanced. By default, the literals '-1' and '0' are ignored. More exceptions can be defined with the property 'ignoreMagicNumbers'." 
+		name="AvoidLiteralsInIfCondition">
+		<description>
+		Avoid using hard-coded literals in conditional statements. By declaring them as static variables or private members with descriptive names maintainability is enhanced. By default, the literals “-1” and “0” are ignored. More exceptions can be defined with the property “ignoreMagicNumbers”.
+		</description>
+		<example>
+		<![CDATA[
+			private static final int MAX_NUMBER_OF_REQUESTS = 10;
+			
+			public void checkRequests() {
+			
+			    if (i == 10) {                        // magic number, buried in a method
+			      doSomething();
+			    }
+			
+			    if (i == MAX_NUMBER_OF_REQUESTS) {    // preferred approach
+			      doSomething();
+			    }
+			
+			    if (aString.indexOf('.') != -1) {}     // magic number -1, by default ignored
+			    if (aString.indexOf('.') >= 0) { }     // alternative approach
+			
+			    if (aDouble > 0.0) {}                  // magic number 0.0
+			    if (aDouble >= Double.MIN_VALUE) {}    // preferred approach
+			}		
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//IfStatement/Expression/*/PrimaryExpression/PrimaryPrefix/Literal
+					[not(NullLiteral)]
+					[not(BooleanLiteral)]
+					[empty(index-of(tokenize($ignoreMagicNumbers, '\s*,\s*'), @Image))]				
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[AvoidEnumAsIdentifier] Use of the term ‘enum’ will conflict with newer versions of Java since it is a reserved word." 
+		name="AvoidEnumAsIdentifier">
+		<description>
+		Use of the term ‘enum’ will conflict with newer versions of Java since it is a reserved word.
+		</description>
+		<example>
+		<![CDATA[
+			public class A {
+			    public class Foo {
+			        String enum = "foo";
+			    }
+			}		
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//VariableDeclaratorId[@Image='enum']				
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[FinalFieldCouldBeStatic] If a final field is assigned to a compile-time constant, it could be made static, thus saving overhead in each object at runtime." 
+		name="FinalFieldCouldBeStatic">
+		<description>
+		If a final field is assigned to a compile-time constant, it could be made static, thus saving overhead in each object at runtime.
+		</description>
+		<example>
+		<![CDATA[
+			public class Foo {
+			  public final int BAR = 42; // this could be static and save some space
+			}	
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//FieldDeclaration
+					 [@Final='true' and @Static='false']
+					   /VariableDeclarator/VariableInitializer/Expression
+					    /PrimaryExpression[not(PrimarySuffix)]/PrimaryPrefix/Literal				
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[AvoidRethrowingException] Catch blocks that merely rethrow a caught exception only add to code size and runtime complexity." 
+		name="AvoidRethrowingException">
+		<description>
+		Catch blocks that merely rethrow a caught exception only add to code size and runtime complexity.
+		</description>
+		<example>
+		<![CDATA[
+			public void bar() {
+			    try {
+			        // do something
+			    }  catch (SomeException se) {
+			       throw se;
+			    }
+			}		
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//CatchStatement[FormalParameter
+					 /VariableDeclaratorId/@Image = Block/BlockStatement/Statement
+					 /ThrowStatement/Expression/PrimaryExpression[count(PrimarySuffix)=0]/PrimaryPrefix/Name/@Image
+					 and count(Block/BlockStatement/Statement) =1]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[WhileLoopsMustUseBraces] Avoid using ‘while’ statements without using braces to surround the code block. If the code formatting or indentation is lost then it becomes difficult to separate the code being controlled from the rest." 
+		name="WhileLoopsMustUseBraces">
+		<description>
+			Avoid using ‘while’ statements without using braces to surround the code block. If the code formatting or indentation is lost then it becomes difficult to separate the code being controlled from the rest.
+		</description>
+		<example>
+		<![CDATA[
+			while (true)    // not recommended
+			      x++;
+			      
+			while (true) {  // preferred approach
+			      x++;
+			}		
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//WhileStatement[not(Statement/Block)]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[IfElseStmtsMustUseBraces] Avoid using if..else statements without using surrounding braces. If the code formatting or indentation is lost then it becomes difficult to separate the code being controlled from the rest." 
+		name="IfElseStmtsMustUseBraces">
+		<description>
+		Avoid using if..else statements without using surrounding braces. If the code formatting or indentation is lost then it becomes difficult to separate the code being controlled from the rest.
+		</description>
+		<example>
+		<![CDATA[
+			// this is OK
+			if (foo) x++;
+			
+			   // but this is not
+			if (foo)
+			       x = x+1;
+			   else
+			       x = x-1;		
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//Statement
+					 [parent::IfStatement[@Else='true']]
+					 [not(child::Block)]
+					 [not(child::IfStatement)]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[ForLoopsMustUseBraces] Avoid using ‘for’ statements without using curly braces. If the code formatting or indentation is lost then it becomes difficult to separate the code being controlled from the rest." 
+		name="ForLoopsMustUseBraces">
+		<description>
+		Avoid using ‘for’ statements without using curly braces. If the code formatting or indentation is lost then it becomes difficult to separate the code being controlled from the rest.
+		</description>
+		<example>
+		<![CDATA[
+			for (int i = 0; i < 42; i++)
+			   foo();  
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//ForStatement[not(Statement/Block)]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[ExtendsObject] No need to explicitly extend Object." 
+		name="ExtendsObject">
+		<description>
+		No need to explicitly extend Object.
+		</description>
+		<example>
+		<![CDATA[
+			public class Foo extends Object {     // not required
+			}  
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//ExtendsList/ClassOrInterfaceType[@Image='Object' or @Image='java.lang.Object']
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[AvoidPrintStackTrace] Avoid printStackTrace(); use a logger call instead." 
+		name="AvoidPrintStackTrace">
+		<description>
+		Avoid printStackTrace(); use a logger call instead.
+		</description>
+		<example>
+		<![CDATA[
+			class Foo {
+				void bar() {
+					try {
+						// do something
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}  
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//PrimaryExpression
+					 [PrimaryPrefix/Name[contains(@Image,'printStackTrace')]]
+					 [PrimarySuffix[not(boolean(Arguments/ArgumentList/Expression))]]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[AbstractClassWithoutAbstractMethod] Avoid The abstract class does not contain any abstract methods" 
+		name="AbstractClassWithoutAbstractMethod">
+		<description>
+		The abstract class does not contain any abstract methods. An abstract class suggests an incomplete implementation, which is to be completed by subclasses implementing the abstract methods. If the class is intended to be used as a base class only (not to be instantiated directly) a protected constructor can be provided prevent direct instantiation.
+		</description>
+		<example>
+		<![CDATA[
+			public abstract class Foo {
+			  void int method1() { ... }
+			  void int method2() { ... }
+			  // consider using abstract methods or removing
+			  // the abstract modifier and adding protected constructors
+			}
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//ClassOrInterfaceDeclaration
+					 [@Abstract='true'
+					  and count( .//MethodDeclaration[@Abstract='true'] )=0 ]
+					  [count(ImplementsList)=0]
+					  [count(.//ExtendsList)=0]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[PositionLiteralsFirstInCaseInsensitiveComparisons] Position literals first in comparisons, if the second argument is null then NullPointerExceptions can be avoided, they will just return false." 
+		name="PositionLiteralsFirstInCaseInsensitiveComparisons">
+		<description>
+		Position literals first in comparisons, if the second argument is null then NullPointerExceptions can be avoided, they will just return false.
+		</description>
+		<example>
+		<![CDATA[
+			class Foo {
+			  boolean bar(String x) {
+				return x.equalsIgnoreCase("2"); // should be "2".equalsIgnoreCase(x)
+			  }
+			}
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//PrimaryExpression[
+							PrimaryPrefix[Name
+									[
+						(ends-with(@Image, '.equalsIgnoreCase'))
+									]
+							]
+							[
+									   (../PrimarySuffix/Arguments/ArgumentList/Expression/PrimaryExpression/PrimaryPrefix/Literal)
+						and
+						( count(../PrimarySuffix/Arguments/ArgumentList/Expression) = 1 )
+							]
+					]
+					[not(ancestor::Expression/ConditionalAndExpression//EqualityExpression[@Image='!=']//NullLiteral)]
+					[not(ancestor::Expression/ConditionalOrExpression//EqualityExpression[@Image='==']//NullLiteral)]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[PositionLiteralsFirstInComparisons] Position literals first in comparisons, if the second argument is null then NullPointerExceptions can be avoided, they will just return false." 
+		name="PositionLiteralsFirstInComparisons">
+		<description>
+		Position literals first in comparisons, if the second argument is null then NullPointerExceptions can be avoided, they will just return false.
+		</description>
+		<example>
+		<![CDATA[
+			class Foo {
+			  boolean bar(String x) {
+				return x.equals("2"); // should be "2".equals(x)
+			  }
+			}
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//PrimaryExpression[
+						PrimaryPrefix[Name[(ends-with(@Image, '.equals'))]]
+							[
+								(../PrimarySuffix/Arguments/ArgumentList/Expression/PrimaryExpression/PrimaryPrefix/Literal[@StringLiteral='true'])
+								and
+								( count(../PrimarySuffix/Arguments/ArgumentList/Expression) = 1 )
+							]
+					]
+					[not(ancestor::Expression/ConditionalAndExpression//EqualityExpression[@Image='!=']//NullLiteral)]
+					[not(ancestor::Expression/ConditionalOrExpression//EqualityExpression[@Image='==']//NullLiteral)]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[SwitchStmtsShouldHaveDefault] All switch statements should include a default option to catch any unspecified values." 
+		name="SwitchStmtsShouldHaveDefault">
+		<description>
+		All switch statements should include a default option to catch any unspecified values.
+		</description>
+		<example>
+		<![CDATA[
+			class Foo {
+				public void bar() {
+					int x = 2;
+					switch (x) {
+					  case 1: int j = 6;
+					  case 2: int j = 8;
+						  // missing default: here
+					}
+				}
+			}
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//SwitchStatement[not(SwitchLabel[@Default='true'])]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[SystemPrintln] References to System.(out|in|err).print are usually intended for debugging purposes and can remain in the codebase even in production code. By using a logger one can enable/disable this behaviour at will (and by priority) and avoid clogging the Standard out log." 
+		name="SystemPrintln">
+		<description>
+		References to System.(out|err).print are usually intended for debugging purposes and can remain in the codebase even in production code. By using a logger one can enable/disable this behaviour at will (and by priority) and avoid clogging the Standard out log.
+		</description>
+		<example>
+		<![CDATA[
+			class Foo{
+				Logger log = Logger.getLogger(Foo.class.getName());
+				public void testA () {
+					System.out.println("Entering test");
+					// Better use this
+					log.fine("Entering test");
+				}
+			}
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//Name[
+						starts-with(@Image, 'System.out.print')
+						or
+						starts-with(@Image, 'System.in.print')
+						or
+						starts-with(@Image, 'System.err.print')
+						]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[DoNotCallSystemExit] Web applications should not call System.exit(), since only the web container or the application server should stop the JVM. This rule also checks for the equivalent call Runtime.getRuntime().exit()." 
+		name="DoNotCallSystemExit">
+		<description>
+		Web applications should not call System.exit(), since only the web container or the application server should stop the JVM. This rule also checks for the equivalent call Runtime.getRuntime().exit().
+		</description>
+		<example>
+		<![CDATA[
+			public void bar() {
+			    System.exit(0);                 // never call this when running in an application server!
+			}
+			public void foo() {
+			    Runtime.getRuntime().exit(0);   // never stop the JVM manually, the container will do this.
+			}		
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//Name[
+					    starts-with(@Image,'System.exit')
+					    or
+					    (starts-with(@Image,'Runtime.getRuntime') and ../../PrimarySuffix[ends-with(@Image,'exit')])
+					]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	
+	
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[EmptyStatementBlock] Empty block statements serve no purpose and should be removed." 
+		name="EmptyStatementBlock">
+		<description>
+		Empty block statements serve no purpose and should be removed.
+		</description>
+		<example>
+		<![CDATA[
+			public class Foo {
+			
+			   private int _bar;
+			
+			   public void setBar(int bar) {
+			      { _bar = bar; } // Why not?
+			      {} // But remove this.
+			   }
+			
+			}	
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//BlockStatement/Statement/Block[count(*) = 0]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[EmptyFinallyBlock] Empty finally blocks serve no purpose and should be removed." 
+		name="EmptyFinallyBlock">
+		<description>
+		Empty finally blocks serve no purpose and should be removed.
+		</description>
+		<example>
+		<![CDATA[
+			public class Foo {
+			    public void bar() {
+			        try {
+			            int x=2;
+			        } finally {
+			            // empty!
+			        }
+			    }
+			}	
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//FinallyStatement[count(Block/BlockStatement) = 0]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[EmptyCatchBlock] Empty Catch Block finds instances where an exception is caught, but nothing is done.In most circumstances, this swallows an exception which should either be acted on or reported." 
+		name="EmptyCatchBlock">
+		<description>
+		Empty Catch Block finds instances where an exception is caught, but nothing is done.In most circumstances, this swallows an exception which should either be acted on or reported.
+		</description>
+		<example>
+		<![CDATA[
+			public void doSomething() {
+			    try {
+			        FileInputStream fis = new FileInputStream("/tmp/bugger");
+			    } catch (IOException ioe) {
+			        // not good
+			    }
+			}		
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//CatchStatement
+					 [count(Block/BlockStatement) = 0 and ($allowCommentedBlocks != 'true' or Block/@containsComment = 'false')]
+					 [FormalParameter/Type/ReferenceType
+					   /ClassOrInterfaceType[@Image != 'InterruptedException' and @Image != 'CloneNotSupportedException']
+					 ]
+					 [FormalParameter/VariableDeclaratorId[not(matches(@Image, $allowExceptionNameRegex))]]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[DoNotThrowExceptionInFinally] Throwing exceptions within a 'finally' block is confusing since they may mask other exceptions or code defects. Note: This is a PMD implementation of the Lint4j rule 'A throw in a finally block'" 
+		name="DoNotThrowExceptionInFinally">
+		<description>
+		Throwing exceptions within a 'finally' block is confusing since they may mask other exceptions or code defects. Note: This is a PMD implementation of the Lint4j rule 'A throw in a finally block'
+		</description>
+		<example>
+		<![CDATA[
+			public class Foo {
+			    public void bar() {
+			        try {
+			            // Here do some stuff
+			        } catch( Exception e) {
+			            // Handling the issue
+			        } finally {
+			            // is this really a good idea ?
+			            throw new Exception();
+			        }
+			    }
+			}		
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//FinallyStatement[descendant::ThrowStatement]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+	<rule 
+		class="net.sourceforge.pmd.lang.rule.XPathRule" 
+		language="java" 
+		message="[DoNotCallGarbageCollectionExplicitly] Calls to System.gc(), Runtime.getRuntime().gc(), and System.runFinalization() are not advised. Code should have the same behavior whether the garbage collection is disabled using the option -Xdisableexplicitgc or not. Moreover, “modern” jvms do a very good job handling garbage collections. If memory usage issues unrelated to memory leaks develop within an application, it should be dealt with JVM options rather than within the code itself." 
+		name="DoNotCallGarbageCollectionExplicitly">
+		<description>
+		Calls to System.gc(), Runtime.getRuntime().gc(), and System.runFinalization() are not advised. Code should have the same behavior whether the garbage collection is disabled using the option -Xdisableexplicitgc or not. Moreover, “modern” jvms do a very good job handling garbage collections. If memory usage issues unrelated to memory leaks develop within an application, it should be dealt with JVM options rather than within the code itself.
+		</description>
+		<example>
+		<![CDATA[
+			public class GCCall {
+			    public GCCall() {
+			        // Explicit gc call !
+			        System.gc();
+			    }
+			
+			    public void doSomething() {
+			        // Explicit gc call !
+			        Runtime.getRuntime().gc();
+			    }
+			
+			    public explicitGCcall() {
+			        // Explicit gc call !
+			        System.gc();
+			    }
+			
+			    public void doSomething() {
+			        // Explicit gc call !
+			        Runtime.getRuntime().gc();
+			    }
+			}
+		]]>
+		</example>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+				<![CDATA[
+					//Name[
+					(starts-with(@Image, 'System.') and
+					(starts-with(@Image, 'System.gc') or
+					starts-with(@Image, 'System.runFinalization'))) or
+					(
+					starts-with(@Image,'Runtime.getRuntime') and
+					../../PrimarySuffix[ends-with(@Image,'gc')]
+					)
+					]
+				]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+
+</ruleset>

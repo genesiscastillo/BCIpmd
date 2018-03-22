@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<ruleset name="normativaJava"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+  <description>
+		Ruleset de lista de clases y metodos no permitidos.
+  </description>
+
+    <!-- Reglas Basica de codificacion Java -->
+    <!-- 
+    <rule ref="category/java/reglaGeneral.xml/AbstractClassWithoutAbstractMethod" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/AvoidReassigningParametersRule" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/ForLoopCanBeForeachRule" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/PositionLiteralsFirstInCaseInsensitiveComparisons" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/PositionLiteralsFirstInComparisons" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/SwitchStmtsShouldHaveDefault" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/SystemPrintln" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/UnusedFormalParameterRule" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/UnusedImportsRule" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/UnusedLocalVariableRule" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/UnusedPrivateFieldRule" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/UseCollectionIsEmptyRule" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/ExtendsObject" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/ForLoopsMustUseBraces" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/IfElseStmtsMustUseBraces" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/UnnecessaryFullyQualifiedNameRule" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/WhileLoopsMustUseBraces" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/AvoidRethrowingException" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/SingularFieldRule" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/AssignmentInOperandRule" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/AvoidEnumAsIdentifier" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/AvoidFieldNameMatchingMethodNameRule" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/AvoidLiteralsInIfCondition" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/CompareObjectsWithEqualsRule" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/DoNotCallGarbageCollectionExplicitly" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/DoNotCallSystemExit" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/DoNotThrowExceptionInFinally" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/EmptyCatchBlock" deprecated="false" />
+	<rule ref="category/java/reglaGeneral.xml/CommentRequiredRule" deprecated="false" />
+	-->
+	<rule ref="category/java/reglaNormativa.xml/clasesMetodosProhibidos" deprecated="false" />
+	<rule ref="category/java/reglaNormativa.xml/noDuplicateImports" deprecated="false" />
+	<rule ref="category/java/reglaNormativa.xml/noUsarFloat" deprecated="false" />
+	<rule ref="category/java/reglaNormativa.xml/noUsarCatchVacio" deprecated="false" />
+	<rule ref="category/java/reglaNormativa.xml/noDeclararAtributosSeguidos" deprecated="false" />
+	<rule ref="category/java/reglaNormativa.xml/noUsarClassesInner" deprecated="false" />
+	<rule ref="category/java/reglaNormativa.xml/noUsarNumerosMagicos" deprecated="false" />
+	<rule ref="category/java/reglaNormativa.xml/ordenCorrectoModificadores" deprecated="false" />
+	
+</ruleset>
